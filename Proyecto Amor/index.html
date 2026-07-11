@@ -1,0 +1,645 @@
+<title>Para Guisell ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+overflow:hidden;
+background:linear-gradient(180deg,#080816,#14142d,#1b1037);
+height:100vh;
+color:white;
+}
+
+canvas{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:-2;
+}
+
+#hearts{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
+z-index:-1;
+overflow:hidden;
+}
+
+.heart{
+position:absolute;
+color:#ff4d88;
+animation:fall linear forwards;
+opacity:.8;
+}
+
+@keyframes fall{
+
+0%{
+transform:translateY(-10vh) rotate(0deg);
+opacity:0;
+}
+
+20%{
+opacity:1;
+}
+
+100%{
+transform:translateY(110vh) rotate(360deg);
+opacity:0;
+}
+
+}
+
+.container{
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+height:100vh;
+text-align:center;
+padding:20px;
+}
+
+h1{
+
+font-size:60px;
+margin-bottom:20px;
+animation:fade 2s;
+
+}
+
+@keyframes fade{
+
+from{
+
+opacity:0;
+transform:translateY(-30px);
+
+}
+
+to{
+
+opacity:1;
+transform:translateY(0);
+
+}
+
+}
+
+.subtitle{
+
+font-size:23px;
+margin-bottom:40px;
+opacity:.9;
+
+}
+
+.buttons{
+
+display:flex;
+gap:20px;
+position:relative;
+
+}
+
+button{
+
+border:none;
+padding:16px 42px;
+font-size:20px;
+border-radius:50px;
+cursor:pointer;
+transition:.3s;
+
+}
+
+#yes{
+
+background:#ff3d7d;
+color:white;
+box-shadow:0 0 20px #ff3d7d;
+
+}
+
+#yes:hover{
+
+transform:scale(1.1);
+
+}
+
+#no{
+
+background:white;
+color:#222;
+position:relative;
+
+}
+
+#story{
+
+display:none;
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+overflow-y:auto;
+padding:60px 20px;
+text-align:center;
+background:rgba(0,0,0,.86);
+
+}
+
+.photo{
+
+width:300px;
+max-width:90%;
+border-radius:20px;
+margin:30px auto;
+display:block;
+box-shadow:0 0 25px hotpink;
+transition:1s;
+
+}
+
+#typing{
+
+max-width:850px;
+margin:auto;
+font-size:24px;
+line-height:1.8;
+
+}
+
+#timer{
+
+font-size:30px;
+margin:30px 0;
+color:#ff9dc6;
+
+}
+
+.end{
+
+font-size:45px;
+margin:80px 0;
+
+}
+
+.finalButton{
+
+padding:18px 35px;
+font-size:22px;
+border:none;
+border-radius:50px;
+background:#ff4b91;
+color:white;
+cursor:pointer;
+margin-top:50px;
+box-shadow:0 0 25px hotpink;
+transition:.4s;
+
+}
+
+.finalButton:hover{
+
+transform:scale(1.1);
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<canvas id="stars"></canvas>
+
+<div id="hearts"></div>
+
+<div class="container" id="home">
+
+<h1>❤️ Hola Guisell ❤️</h1>
+
+<div class="subtitle">
+
+Tengo una pequeña sorpresa para ti...
+
+</div>
+
+<div class="buttons">
+
+<button id="yes">
+
+Abrir ❤️
+
+</button>
+
+<button id="no">
+
+No 🙈
+
+</button>
+
+</div>
+
+</div>
+
+<div id="story">
+
+<h1>
+
+Feliz 1 año y 2 meses ❤️
+
+</h1>
+
+<div id="timer"></div>
+
+<img src="amor1.jpeg" class="photo" id="photo">
+
+<div id="typing"></div>
+
+<br><br>
+
+<img src="amorcito1.jpeg" class="photo">
+
+<div class="end">
+
+❤️ Te amo muchísimo ❤️
+
+<br>
+
+— Luciano —
+
+<br><br>
+
+<button class="finalButton" onclick="loveExplosion()">
+
+¿Seguimos escribiendo nuestra historia? ❤️
+
+</button>
+
+</div>
+
+</div>
+
+<audio id="music" loop>
+
+<source src="leyenda.mp3" type="audio/mpeg">
+
+</audio>
+
+<script>
+
+const no=document.getElementById("no");
+
+no.addEventListener("mouseover",()=>{
+
+const x=Math.random()*(window.innerWidth-150);
+
+const y=Math.random()*(window.innerHeight-100);
+
+no.style.position="fixed";
+no.style.left=x+"px";
+no.style.top=y+"px";
+
+});
+
+const hearts=document.getElementById("hearts");
+
+function createHeart(){
+
+const h=document.createElement("div");
+
+h.className="heart";
+
+h.innerHTML="❤";
+
+h.style.left=Math.random()*100+"vw";
+
+h.style.fontSize=(15+Math.random()*30)+"px";
+
+h.style.animationDuration=(4+Math.random()*6)+"s";
+
+hearts.appendChild(h);
+
+setTimeout(()=>h.remove(),9000);
+
+}
+
+setInterval(createHeart,250);
+
+const canvas=document.getElementById("stars");
+
+const ctx=canvas.getContext("2d");
+
+canvas.width=innerWidth;
+
+canvas.height=innerHeight;
+
+const stars=[];
+
+for(let i=0;i<250;i++){
+
+stars.push({
+
+x:Math.random()*canvas.width,
+
+y:Math.random()*canvas.height,
+
+r:Math.random()*2
+
+});
+
+}
+
+function animate(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+ctx.fillStyle="white";
+
+stars.forEach(s=>{
+
+ctx.beginPath();
+
+ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+
+ctx.fill();
+
+});
+
+requestAnimationFrame(animate);
+
+}
+
+animate();
+const carta=`Hola mi amor ❤️
+
+Hoy cumplimos 1 año y 2 meses juntos.
+
+Puede parecer poco para algunas personas,
+pero para mí han sido los 14 meses más bonitos de mi vida.
+
+Gracias por cada sonrisa.
+Gracias por cada abrazo.
+Gracias por escucharme cuando más lo necesito.
+Gracias por estar conmigo incluso en los días difíciles.
+
+Desde que llegaste a mi vida todo tiene más sentido.
+
+Me encanta hacerte reír.
+Me encanta abrazarte.
+Me encanta mirarte y pensar:
+"Ella es el amor de mi vida."
+
+No sé qué nos deparará el futuro...
+
+Pero sí sé una cosa...
+
+Quiero seguir construyendo recuerdos contigo.
+
+Quiero seguir celebrando cada mes,
+cada año,
+cada meta
+y cada sueño juntos.
+
+Porque contigo aprendí que el amor no está en los grandes regalos...
+
+Está en los pequeños momentos que vivimos cada día.
+
+Gracias por hacerme tan feliz.
+
+Feliz 1 año y 2 meses mi princesa.
+
+Te amo muchísimo ❤️
+
+Con todo mi amor...
+
+Luciano ❤️`;
+
+const typing=document.getElementById("typing");
+const music=document.getElementById("music");
+const story=document.getElementById("story");
+const home=document.getElementById("home");
+
+document.getElementById("yes").onclick=()=>{
+
+music.play();
+
+home.style.display="none";
+
+story.style.display="block";
+
+typeLetter();
+
+updateTimer();
+
+setInterval(updateTimer,1000);
+
+};
+
+let index=0;
+
+function typeLetter(){
+
+if(index<carta.length){
+
+typing.innerHTML+=carta.charAt(index);
+
+typing.scrollIntoView(false);
+
+index++;
+
+setTimeout(typeLetter,45);
+
+}
+
+}
+
+const startDate=new Date("2025-05-10T00:00:00");
+
+function updateTimer(){
+
+const now=new Date();
+
+let diff=now-startDate;
+
+const days=Math.floor(diff/86400000);
+
+const hours=Math.floor((diff%86400000)/3600000);
+
+const minutes=Math.floor((diff%3600000)/60000);
+
+const seconds=Math.floor((diff%60000)/1000);
+
+document.getElementById("timer").innerHTML=
+`❤️ Llevamos juntos ❤️
+<br><br>
+${days} días
+${hours} horas
+${minutes} minutos
+${seconds} segundos`;
+
+}
+
+const photo=document.getElementById("photo");
+
+const photos=[
+"amor1.jpeg",
+"amorcito1.jpeg"
+];
+
+let p=0;
+
+setInterval(()=>{
+
+p++;
+
+if(p>=photos.length)p=0;
+
+photo.style.opacity=0;
+
+setTimeout(()=>{
+
+photo.src=photos[p];
+
+photo.style.opacity=1;
+
+},600);
+
+},5000);
+
+//=========================
+// FUEGOS ARTIFICIALES
+//=========================
+
+const fireCanvas=document.createElement("canvas");
+fireCanvas.id="fireworks";
+fireCanvas.style.position="fixed";
+fireCanvas.style.left="0";
+fireCanvas.style.top="0";
+fireCanvas.style.width="100%";
+fireCanvas.style.height="100%";
+fireCanvas.style.pointerEvents="none";
+fireCanvas.style.zIndex="999";
+
+document.body.appendChild(fireCanvas);
+
+const fctx=fireCanvas.getContext("2d");
+
+fireCanvas.width=window.innerWidth;
+fireCanvas.height=window.innerHeight;
+
+window.addEventListener("resize",()=>{
+
+fireCanvas.width=window.innerWidth;
+fireCanvas.height=window.innerHeight;
+
+});
+
+let fireworks=[];
+
+function Firework(){
+
+this.x=Math.random()*fireCanvas.width;
+this.y=Math.random()*fireCanvas.height/2;
+
+this.particles=[];
+
+for(let i=0;i<80;i++){
+
+this.particles.push({
+
+x:this.x,
+y:this.y,
+
+dx:(Math.random()-0.5)*8,
+dy:(Math.random()-0.5)*8,
+
+life:100
+
+});
+
+}
+
+}
+
+function animateFireworks(){
+
+fctx.clearRect(0,0,fireCanvas.width,fireCanvas.height);
+
+fireworks.forEach((fw,index)=>{
+
+fw.particles.forEach(p=>{
+
+p.x+=p.dx;
+
+p.y+=p.dy;
+
+p.dy+=0.03;
+
+p.life--;
+
+fctx.beginPath();
+
+fctx.arc(p.x,p.y,2,0,Math.PI*2);
+
+fctx.fillStyle=`hsl(${Math.random()*360},100%,60%)`;
+
+fctx.fill();
+
+});
+
+fw.particles=fw.particles.filter(a=>a.life>0);
+
+if(fw.particles.length==0){
+
+fireworks.splice(index,1);
+
+}
+
+});
+
+requestAnimationFrame(animateFireworks);
+
+}
+
+animateFireworks();
+
+setInterval(()=>{
+
+if(story.style.display=="block"){
+
+fireworks.push(new Firework());
+
+}
+
+},900);
+
+function loveExplosion(){
+
+for(let i=0;i<300;i++){
+
+setTimeout(createHeart,i*8);
+
+}
+
+alert("❤️ Gracias por estos 14 meses tan maravillosos.\n\nTe amo muchísimo Guisell.\n\nCon amor,\nLuciano ❤️");
+
+}
+
+</script>
